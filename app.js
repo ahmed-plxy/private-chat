@@ -29,7 +29,7 @@ const state = {
 };
 
 localStorage.setItem(STORAGE_DEVICE, state.deviceId);
-els.roomLabel.textContent = "المحادثة الخاصة";
+els.roomLabel.textContent = "شات";
 
 function sanitizeChannel(value) {
   return String(value || "")
@@ -75,7 +75,7 @@ function updateIdentity() {
 }
 
 function renderEmpty() {
-  els.messages.innerHTML = `<div class="empty">ابدأ الرسالة الأولى</div>`;
+  els.messages.innerHTML = `<div class="empty">جرب. ايعت مسج</div>`;
 }
 
 function escapeHtml(str) {
@@ -92,7 +92,7 @@ function renderMessage(msg) {
   const el = document.createElement("div");
   el.className = `message ${mine ? "me" : "other"}`;
   el.innerHTML = `
-    <div class="name">${escapeHtml(msg.name || "بدون اسم")}</div>
+    <div class="name">${escapeHtml(msg.name || "حط اسمك")}</div>
     <div class="text">${escapeHtml(msg.text || "")}</div>
     <div class="meta">
       <span>${mine ? "أنا" : "هو"}</span>
@@ -121,11 +121,11 @@ function configLooksValid() {
 function attachChannel() {
   detachChannel();
   els.messages.innerHTML = "";
-  els.dbHint.textContent = "جارٍ الاتصال";
-  els.netState.textContent = "متصل";
+  els.dbHint.textContent = "جاري الاتصال";
+  els.netState.textContent = "اون لاين";
 
   if (!window.firebase || !configLooksValid()) {
-    els.dbHint.textContent = "أضف Firebase";
+    els.dbHint.textContent = "Firebase";
     renderEmpty();
     updateIdentity();
     return;
@@ -139,7 +139,7 @@ function attachChannel() {
   state.channelRef = state.db.ref(`channels/${state.channelId}/messages`);
   state.channelQuery = state.channelRef.orderByChild("createdAt");
   state.ready = true;
-  els.dbHint.textContent = "جاهز";
+  els.dbHint.textContent = "عشان لو قفلت سوشيال";
 
   state.childListener = (snap) => {
     const msg = snap.val();
@@ -169,13 +169,13 @@ function attachChannel() {
 
 async function sendMessage(text) {
   if (!state.channelRef || !state.ready) {
-    toast("المحادثة غير جاهزة");
+    toast("فيه مشكله");
     return;
   }
 
   const name = getName();
   if (!name) {
-    toast("اكتب اسمك أولًا");
+    toast("يسطا اكتب اسمك الاول");
     els.nameInput.focus();
     return;
   }
@@ -192,14 +192,14 @@ els.nameInput.value = getName();
 
 els.saveNameBtn.addEventListener("click", () => {
   setName(els.nameInput.value);
-  toast("تم الحفظ");
+  toast("اتحفظ يدولي");
 });
 
 els.nameInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     setName(els.nameInput.value);
-    toast("تم الحفظ");
+    toast("اتحفظ يدولي");
   }
 });
 
@@ -212,12 +212,12 @@ els.composer.addEventListener("submit", async (e) => {
     els.messageInput.value = "";
   } catch (err) {
     console.error(err);
-    toast("تعذر الإرسال");
+    toast("فشل الارسال");
   }
 });
 
 window.addEventListener("online", () => {
-  els.netState.textContent = "متصل";
+  els.netState.textContent = "اون لاين";
 });
 
 window.addEventListener("offline", () => {
