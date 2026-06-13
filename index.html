@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بيننا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar card">
+      <div class="brand">
+        <div class="logo">ب</div>
+        <div class="titlewrap">
+          <h1>بيننا</h1>
+          <div class="statusrow">
+            <span class="pill"><span class="dot"></span><span id="netState">متصل</span></span>
+            <span class="pill" id="roomLabel">المحادثة الخاصة</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <span class="pill subtle" id="dbHint">جاهز</span>
+      </div>
+    </header>
+
+    <section class="shell card">
+      <div class="shellhead">
+        <div class="namebox">
+          <input class="field" id="nameInput" type="text" placeholder="اسمك" maxlength="24" autocomplete="name" />
+          <button class="btn" id="saveNameBtn" type="button">حفظ</button>
+        </div>
+
+        <div class="identity">
+          <span class="status"><span class="status-dot"></span><span id="identityLabel">أنت: —</span></span>
+        </div>
+      </div>
+
+      <div class="messages" id="messages" aria-live="polite"></div>
+
+      <form class="composer" id="composer">
+        <div class="composer-left">
+          <textarea id="messageInput" placeholder="اكتب رسالتك..."></textarea>
+        </div>
+        <button class="btn primary" id="sendBtn" type="submit">إرسال</button>
+      </form>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="./firebase-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-database-compat.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
