@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>شات</title>
+  <title>بيننا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -12,9 +15,10 @@
       <div class="brand">
         <div class="logo">⌬</div>
         <div class="titlewrap">
-          <h1>شات</h1>
+          <h1>مش عارف اسميه ايه</h1>
           <div class="statusrow">
             <span class="pill"><span class="dot"></span><span id="netState">متصل</span></span>
+            <span class="pill subtle" id="peerState">الطرف الآخر: —</span>
             <span class="pill" id="roomLabel">الشات</span>
           </div>
         </div>
@@ -22,33 +26,25 @@
 
       <div class="toolbar">
         <span class="pill subtle" id="dbHint">جاهز</span>
-        <span class="pill subtle" id="peerStatusLabel">—</span>
-        <span class="pill subtle" id="currentUserLabel">—</span>
-        <button class="btn" id="clearChatBtn" type="button">مسح الشات
-        <button class="btn" id="newChatBtn" type="button">ابدأ شات جديد</button>
-        <button class="btn" id="logoutBtn" type="button">خروج</button>
       </div>
     </header>
 
     <section class="shell card">
       <div class="shellhead">
+        <div class="namebox">
+          <input class="field" id="nameInput" type="text" placeholder="اسمك" maxlength="24" autocomplete="name" />
+          <button class="btn" id="saveNameBtn" type="button">احفظ</button>
+        </div>
+
         <div class="identity">
           <span class="status"><span class="status-dot"></span><span id="identityLabel">أنت: —</span></span>
         </div>
-        <div class="pinned-banner" id="pinnedBanner" hidden></div>
       </div>
 
       <div class="messages" id="messages" aria-live="polite"></div>
 
       <form class="composer" id="composer">
         <div class="composer-left">
-          <div class="replybar" id="replyBar" hidden>
-            <div class="replybar-text">
-              <span class="replytag">رد على</span>
-              <span id="replyText">—</span>
-            </div>
-            <button class="icon-btn" id="cancelReplyBtn" type="button" aria-label="إلغاء الرد">×</button>
-          </div>
           <textarea id="messageInput" placeholder="اكتب رسالتك..."></textarea>
         </div>
         <button class="btn primary" id="sendBtn" type="submit">إبعت</button>
@@ -56,40 +52,7 @@
     </section>
   </main>
 
-  <div class="message-menu" id="messageMenu" hidden>
-    <div class="message-menu-title" id="messageMenuTitle">خيارات الرسالة</div>
-    <div class="message-menu-actions" id="messageMenuActions"></div>
-  </div>
-
   <div class="toast" id="toast"></div>
-
-  <div class="auth-screen" id="authScreen">
-    <div class="auth-card card">
-      <div class="auth-head">
-        <h2>خش بأيدك اليمين</h2>
-        <p>أحمد و معاذ  فقط</p>
-      </div>
-
-      <form class="auth-form" id="authForm">
-        <label>
-          الاسم
-          <select id="authUser" required></select>
-        </label>
-
-        <label>
-          الكود
-          <input id="authPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••" required />
-        </label>
-
-        <div class="auth-actions">
-          <button class="btn primary" id="authBtn" type="submit">دخول</button>
-          <div class="auth-hint" id="authHint"></div>
-        </div>
-      </form>
-
-      <div class="auth-foot">اختار اسمك وحط الكود دا 1357</div>
-    </div>
-  </div>
 
   <script src="./firebase-config.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
